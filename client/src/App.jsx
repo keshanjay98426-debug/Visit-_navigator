@@ -8,6 +8,14 @@ import LocationDetail from './pages/LocationDetail';
 import TripPlanner from './pages/TripPlanner';
 import SavedTrips from './pages/SavedTrips';
 import UserManual from './pages/UserManual';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import CategoryManagement from './pages/admin/Categories';
+import LocationManagement from './pages/admin/Locations';
+import MultiRoute from './pages/admin/MultiRoute';
+import Dashboard from './pages/admin/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminLayout from './components/AdminLayout';
 
 function App() {
   return (
@@ -21,9 +29,31 @@ function App() {
 
             <Route path="/trip-planner" element={<ProtectedRoute><TripPlanner /></ProtectedRoute>} />
             <Route path="/saved-trips" element={<ProtectedRoute><SavedTrips /></ProtectedRoute>} />
-
             <Route path="/user-manual" element={<UserManual />} />
+
           </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="categories" element={<CategoryManagement />} />
+            <Route path="locations" element={<LocationManagement />} />
+            <Route path="multi-route" element={<MultiRoute />} />
+          </Route>
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+
+
         </Routes>
         </Router>
     </TripProvider>
