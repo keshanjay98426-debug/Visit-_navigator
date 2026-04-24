@@ -20,11 +20,11 @@ router.post('/register', async (req, res) => {
             password
         });
 
-        
+       
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
-   
+        
         const count = await User.countDocuments();
         if (count === 0) {
             user.role = 'admin';
@@ -61,12 +61,12 @@ router.post('/login', async (req, res) => {
     try {
         let user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(400).json({ msg: 'Invalid Email Address' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(400).json({ msg: 'Invalid Password' });
         }
 
         const payload = {

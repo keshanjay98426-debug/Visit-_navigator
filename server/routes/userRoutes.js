@@ -3,7 +3,8 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 
-
+// @route   GET api/users/me
+// @desc    Get current user profile including saved trip plans
 router.get('/me', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -14,7 +15,8 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
-
+// @route   POST api/users/plannedTrips
+// @desc    Sync all planned trip plans
 router.post('/plannedTrips', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -27,7 +29,8 @@ router.post('/plannedTrips', auth, async (req, res) => {
     }
 });
 
-
+// @route   POST api/users/savedTrips
+// @desc    Sync all saved trip plans
 router.post('/savedTrips', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
