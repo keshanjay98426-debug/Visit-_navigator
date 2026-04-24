@@ -38,7 +38,7 @@ const Dashboard = () => {
     };
     fetchStats();
     
-
+    // Set up polling for real-time dashboard updates
     const intervalId = setInterval(fetchStats, 5000);
     
     return () => clearInterval(intervalId);

@@ -11,14 +11,14 @@ import {
 } from 'lucide-react';
 import { useTripContext } from '../context/TripContext';
 
-// Helper component to fix map size issues when toggled
+
 const MapResizer = ({ isVisible }) => {
     const map = useMap();
     useEffect(() => {
         if (isVisible) {
             setTimeout(() => {
                 map.invalidateSize();
-            }, 300); // Wait for CSS transition
+            }, 300); 
         }
     }, [isVisible, map]);
     return null;
@@ -39,7 +39,7 @@ const RoutingMachine = ({ userPos, destPos }) => {
             lineOptions: {
                 styles: [{ color: '#2e7d32', weight: 6, opacity: 0.8 }]
             },
-            show: false,
+            show: false, 
             addWaypoints: false,
             draggableWaypoints: false,
             fitSelectedRoutes: true,
@@ -75,7 +75,7 @@ const LocationDetail = () => {
     const { plannedTrips, activeTripId, addLocationToTrip } = useTripContext();
 
     useEffect(() => {
-        const defaultLocation = { lat: 6.892, lng: 79.963 }; 
+        const defaultLocation = { lat: 6.892, lng: 79.963 }; // Athurugiriya Pore Location
         setUserLocation(defaultLocation);
 
         const fetchPlaceAndReviews = async () => {
@@ -94,7 +94,7 @@ const LocationDetail = () => {
         };
         fetchPlaceAndReviews();
 
-   
+        
         if (plannedTrips && plannedTrips.length > 0) {
             const activeTrip = plannedTrips.find(t => t.id === activeTripId) || plannedTrips[0];
             if (activeTrip) {
@@ -106,7 +106,7 @@ const LocationDetail = () => {
             setIsInTrip(false);
         }
 
-       
+        
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
@@ -141,7 +141,7 @@ const LocationDetail = () => {
                 rating: reviewForm.rating,
                 comment: reviewForm.comment
             });
-            // Refresh reviews
+            
             const res = await axios.get(`http://localhost:5000/api/reviews/${id}`);
             setReviews(res.data);
             setReviewForm({ name: '', rating: 5, comment: '' });
@@ -172,7 +172,7 @@ const LocationDetail = () => {
 
     return (
         <div className="detail-page">
-          
+            {/* Gallery Section */}
             <section className="detail-hero">
                 <div className="gallery-main">
                     <img src={place.images[activeImage] || '/temple.png'} alt={place.name} className="main-img" />
@@ -197,7 +197,7 @@ const LocationDetail = () => {
                 </div>
             </section>
 
-          
+            
             <div className="detail-container">
                 <div className="detail-main-content">
                     <header className="place-header">
@@ -240,7 +240,7 @@ const LocationDetail = () => {
                         </div>
                     </div>
 
-                   
+                    
                     <div className={`directions-box ${showDirections ? 'visible' : ''}`}>
                         <div className="box-header">
                             <h3><Navigation size={20} /> Navigation Guide</h3>

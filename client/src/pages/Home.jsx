@@ -30,7 +30,7 @@ const Home = () => {
         };
         fetchStats();
 
-        // Set up polling for real-time stats updates
+        
         const intervalId = setInterval(fetchStats, 10000);
         
         return () => clearInterval(intervalId);
@@ -38,7 +38,7 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            {/* Hero Section */}
+            
             <section className="hero">
                 <div className="hero-overlay"></div>
                 <img src="/hero.png" alt="Sri Lanka Landscape" className="hero-bg" />
@@ -56,7 +56,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Stats Dashboard */}
+            
             <section className="stats-bar">
                 <div className="stat-item">
                     <div className="stat-icon"><MapPin size={24} /></div>
@@ -81,7 +81,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Featured Section */}
+            
             <section id="featured" className="featured-section">
                 <div className="section-header">
                     <h2>Popular Destinations</h2>
@@ -109,7 +109,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Why Choose Us */}
+        
             <section id="about" className="info-section">
                 <div className="info-grid">
                     <div className="info-img">
@@ -142,6 +142,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
             <style>{`
                 .home-page { padding-top: 0; }
 
@@ -396,8 +397,7 @@ const Home = () => {
                     .hero-btns { flex-direction: column; }
                 }
             `}</style>
-
-            </div>
+        </div>
     );
 };
 

@@ -178,7 +178,7 @@ const SavedTrips = () => {
                 </main>
             </div>
 
-    
+          
             <style>{`
                 .trip-planner-page { min-height: 100vh; padding-top: 80px; background: #fcfdfb; }
                 .planner-header { background: #f8fafc; padding: 50px 40px; text-align: center; border-bottom: 1px solid #e1e8e1; }

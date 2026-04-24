@@ -28,6 +28,7 @@ const Register = () => {
             localStorage.setItem('role', res.data.role);
             localStorage.setItem('username', res.data.username);
 
+            alert('Registration successful!');
             navigate('/', { replace: true });
         } catch (err) {
             setError(err.response?.data?.msg || 'Registration failed');

@@ -37,7 +37,7 @@ export const TripProvider = ({ children }) => {
             console.error('Failed to sync trips from cloud', err);
             clearState();
             if (err.response && err.response.status === 401) {
-              
+             
                 localStorage.removeItem('token');
             }
         }
@@ -47,7 +47,7 @@ export const TripProvider = ({ children }) => {
     useEffect(() => {
         fetchTrips();
         
-    
+       
         const handleAuthChange = () => fetchTrips();
         window.addEventListener('authChange', handleAuthChange);
         
@@ -115,11 +115,12 @@ export const TripProvider = ({ children }) => {
         const trip = plannedTrips.find(t => t.id === tripId);
         if (!trip) return;
 
-       
+    
         const newSavedTrips = [...savedTrips, trip];
         setSavedTrips(newSavedTrips);
         _syncSavedTrips(newSavedTrips);
 
+      
         const newPlannedTrips = plannedTrips.filter(t => t.id !== tripId);
         setPlannedTrips(newPlannedTrips);
         _syncPlannedTrips(newPlannedTrips);

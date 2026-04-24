@@ -84,7 +84,7 @@ const LocationManagement = () => {
     ) : null;
   };
 
- 
+  
   function ChangeView({ center }) {
     const map = useMap();
     useEffect(() => {

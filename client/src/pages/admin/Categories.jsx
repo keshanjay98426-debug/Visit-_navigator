@@ -23,8 +23,7 @@ const CategoryManagement = () => {
   });
 
   const apiUrl = 'http://localhost:5000/api/categories';
-  const token = localStorage.getItem('token'); // Assuming token is stored
-
+  const token = localStorage.getItem('token'); 
   useEffect(() => {
     fetchCategories();
   }, []);

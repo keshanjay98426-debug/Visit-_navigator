@@ -34,7 +34,7 @@ const AdminLayout = () => {
 
   return (
     <div className="admin-container">
-      {/* Logout Confirmation Modal */}
+    
       {showLogoutModal && (
         <div className="modal-overlay">
           <div className="modal-content logout-confirm">
@@ -51,7 +51,7 @@ const AdminLayout = () => {
         </div>
       )}
 
-      {/* Sidebar */}
+   
       <aside className={`admin-sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
           <div className="logo-container">
@@ -83,7 +83,7 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
+     =
       <main className="admin-main">
         <header className="admin-header">
           <div className="header-left">
@@ -420,9 +420,7 @@ const AdminLayout = () => {
           opacity: 0.9;
         }
       `}</style>
-
-
-      </div>
+    </div>
   );
 };
 
