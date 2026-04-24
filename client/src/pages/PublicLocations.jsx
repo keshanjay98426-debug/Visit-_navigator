@@ -39,7 +39,7 @@ const PublicLocations = () => {
 
     return (
         <div className="explore-page">
-          
+            {/* Page Header */}
             <section className="explore-header">
                 <div className="explore-header-content">
                     <h1>Explore <span>Destinations</span></h1>
@@ -47,7 +47,7 @@ const PublicLocations = () => {
                 </div>
             </section>
 
-           
+            {/* Filter Hub */}
             <section className="filter-hub">
                 <div className="filter-content-wrapper">
                     <div className="search-group">

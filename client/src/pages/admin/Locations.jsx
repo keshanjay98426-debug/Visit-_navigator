@@ -8,7 +8,7 @@ import {
   Map as MapIcon, Info, Clock, Navigation2, Filter
 } from 'lucide-react';
 
-// Fix for Leaflet default icon issues in React
+
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -84,7 +84,7 @@ const LocationManagement = () => {
     ) : null;
   };
 
-
+ 
   function ChangeView({ center }) {
     const map = useMap();
     useEffect(() => {
@@ -211,6 +211,7 @@ const LocationManagement = () => {
     try {
       await axios.delete(`${apiUrl}/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
       fetchData();
+      alert('Location deleted successfully');
     } catch (err) {
       alert('Error deleting location');
     }
