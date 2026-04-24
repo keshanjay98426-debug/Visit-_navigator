@@ -72,13 +72,10 @@
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
-[data-theme='dark'] .login-card,
 @media (prefers-color-scheme: dark) {
-    .login-card {
-        background: rgba(22, 23, 29, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    }
+  [data-theme='dark'] .login-card {
+    background: rgba(22, 23, 29, 0.7);
+  }
 }
 
 .login-header {
