@@ -479,6 +479,7 @@ const LocationManagement = () => {
           max-width: 400px;
           gap: 0.75rem;
           box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+          
         }
 
         .search-bar input {
@@ -714,18 +715,20 @@ const LocationManagement = () => {
 
         .map-picker { 
           border: 1.5px solid #e2e8f0; 
+          top: 500px;
           border-radius: 16px; 
           padding: 12px; 
           background: #f8fafc; 
-          position: relative; 
+          position: default;
+         
         }
         
         .map-search-overlay {
-          position: absolute;
-          top: 25px;
+          position: default;
           left: 25px;
           right: 25px;
           z-index: 1000;
+          
         }
         
         .map-search-bar {
@@ -767,6 +770,8 @@ const LocationManagement = () => {
           font-weight: 500;
         }
 
+     
+
         .form-footer { 
           display: flex; 
           justify-content: flex-end; 
@@ -778,6 +783,7 @@ const LocationManagement = () => {
         
         .cancel-btn { 
           padding: 0.875rem 1.75rem; 
+          top:80px;
           border: 1.5px solid #e2e8f0; 
           background: #fff; 
           border-radius: 12px; 
@@ -789,6 +795,7 @@ const LocationManagement = () => {
         .cancel-btn:hover { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; }
         
         .save-btn { 
+          top:80px;
           padding: 0.875rem 1.75rem; 
           background: #0f172a; 
           color: #fff; 
