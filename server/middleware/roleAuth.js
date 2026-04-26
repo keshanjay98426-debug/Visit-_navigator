@@ -1,3 +1,4 @@
+// Export a function that takes allowed roles as input
 module.exports = function (roles) {
     return function (req, res, next) {
         if (!req.user || !roles.includes(req.user.role)) {

@@ -4,6 +4,7 @@ const Review = require('./models/Review');
 
 require('dotenv').config();
 
+// connect to MongoDB and update places with average ratings and review counts
 mongoose.connect(process.env.MONGO_URI).then(async () => {
   const reviews = await Review.find();
   console.log('Total Reviews:', reviews.length);

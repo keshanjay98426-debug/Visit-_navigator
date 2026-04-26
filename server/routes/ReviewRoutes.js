@@ -5,8 +5,7 @@ const Review = require('../models/Review');
 const Place = require('../models/Place');
 const User = require('../models/User');
 
-// @route   GET api/reviews/:placeId
-// @desc    Get all reviews for a place
+
 router.get('/:placeId', async (req, res) => {
     try {
         const reviews = await Review.find({ placeId: req.params.placeId }).populate('userId', 'username');
@@ -17,8 +16,7 @@ router.get('/:placeId', async (req, res) => {
     }
 });
 
-// @route   GET api/reviews
-// @desc    Get all reviews (for admin dashboard counting)
+
 router.get('/', async (req, res) => {
     try {
         const reviews = await Review.find();
@@ -29,25 +27,20 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route   POST api/reviews/:placeId
-// @desc    Add a review to a place
+
 router.post('/:placeId', async (req, res) => {
     try {
         const { rating, comment, reviewerName } = req.body;
         const placeId = req.params.placeId;
 
-        // Check if user is logged in (optional auth)
-        // If auth middleware was used, req.user would exist.
-        // For simplicity, we'll check if a token was provided manually or just treat as anonymous if no user info.
         
         let userId = null;
         let name = reviewerName || 'Anonymous Traveler';
 
-        // Optional: If we want to support both, we can check headers.
-        // But for now, we'll just follow the "no login for travelers" requirement.
+        
 
         const newReview = new Review({
-            userId: null, // Always null for traveler portal anonymous reviews
+            userId: null, 
             reviewerName: name,
             placeId: placeId,
             rating,
@@ -56,7 +49,7 @@ router.post('/:placeId', async (req, res) => {
 
         const review = await newReview.save();
 
-        // Recalculate average rating for the place
+        
         const reviews = await Review.find({ placeId: placeId });
         let avg = 0;
         if (reviews.length > 0) {

@@ -4,8 +4,7 @@ const auth = require('../middleware/auth');
 const roleAuth = require('../middleware/roleAuth');
 const Place = require('../models/Place');
 
-// @route   GET api/places
-// @desc    Get all places with optional search and category filters
+
 router.get('/', async (req, res) => {
     try {
         const { search, category } = req.query;
@@ -26,8 +25,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route   GET api/places/:id
-// @desc    Get place by ID
+
 router.get('/:id', async (req, res) => {
     try {
         const place = await Place.findById(req.params.id).populate('category', 'name');
@@ -44,8 +42,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// @route   POST api/places
-// @desc    Create a place (Admin only)
+
 router.post('/', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 
@@ -58,8 +55,7 @@ router.post('/', [auth, roleAuth(['admin'])], async (req, res) => {
     }
 });
 
-// @route   PUT api/places/:id
-// @desc    Update a place (Admin only)
+
 router.put('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 
@@ -79,8 +75,7 @@ router.put('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     }
 });
 
-// @route   DELETE api/places/:id
-// @desc    Delete a place (Admin only)
+
 router.delete('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 

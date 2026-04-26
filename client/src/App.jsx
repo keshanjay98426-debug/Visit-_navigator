@@ -17,6 +17,7 @@ import TripPlanner from './pages/TripPlanner';
 import SavedTrips from './pages/SavedTrips';
 import UserManual from './pages/UserManual';
 
+// Main application routing setup using React Router
 function App() {
   return (
     <TripProvider>

@@ -1,21 +1,26 @@
+// Import required packages
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+// Import route handlers
 const authRoutes = require('./routes/authRoutes');
 const placeRoutes = require('./routes/placeRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+// Import admin seeder
 const seedAdmin = require('./utils/seeder');
 
+// Import express app
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' })); 
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// Connect to MongoDB database
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log('MongoDB Connected to Visit Navigator DB');
@@ -27,7 +32,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req, res) => {
   res.json({ message: 'Visit Navigator API is running!', timestamp: new Date() });
 });
-
+// Register API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/places', placeRoutes);
 app.use('/api/reviews', reviewRoutes);
@@ -43,7 +48,7 @@ app.get('/', (req, res) => {
   });
 });
 
-
+// Handle undefined routes
 app.use((req, res) => {
   console.log(`[404] ${req.method} ${req.originalUrl}`);
   res.status(404).json({ 
@@ -54,7 +59,10 @@ app.use((req, res) => {
   });
 });
 
+// Set server port
 const PORT = process.env.PORT || 5000;
+
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
