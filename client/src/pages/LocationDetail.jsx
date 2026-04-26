@@ -39,7 +39,7 @@ const RoutingMachine = ({ userPos, destPos }) => {
             lineOptions: {
                 styles: [{ color: '#2e7d32', weight: 6, opacity: 0.8 }]
             },
-            show: false, 
+            show: false,
             addWaypoints: false,
             draggableWaypoints: false,
             fitSelectedRoutes: true,
@@ -94,7 +94,7 @@ const LocationDetail = () => {
         };
         fetchPlaceAndReviews();
 
-        
+        // Check if in active trip
         if (plannedTrips && plannedTrips.length > 0) {
             const activeTrip = plannedTrips.find(t => t.id === activeTripId) || plannedTrips[0];
             if (activeTrip) {
@@ -113,7 +113,8 @@ const LocationDetail = () => {
                 (err) => {
                     console.warn('Geolocation denied or unavailable, using Pore default.', err);
                     setUserLocation(defaultLocation);
-                }
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
             );
         }
     }, [id]);
@@ -141,7 +142,7 @@ const LocationDetail = () => {
                 rating: reviewForm.rating,
                 comment: reviewForm.comment
             });
-            
+          
             const res = await axios.get(`http://localhost:5000/api/reviews/${id}`);
             setReviews(res.data);
             setReviewForm({ name: '', rating: 5, comment: '' });
@@ -172,7 +173,7 @@ const LocationDetail = () => {
 
     return (
         <div className="detail-page">
-            {/* Gallery Section */}
+         
             <section className="detail-hero">
                 <div className="gallery-main">
                     <img src={place.images[activeImage] || '/temple.png'} alt={place.name} className="main-img" />
@@ -197,7 +198,7 @@ const LocationDetail = () => {
                 </div>
             </section>
 
-            
+          
             <div className="detail-container">
                 <div className="detail-main-content">
                     <header className="place-header">
@@ -240,7 +241,7 @@ const LocationDetail = () => {
                         </div>
                     </div>
 
-                    
+                   
                     <div className={`directions-box ${showDirections ? 'visible' : ''}`}>
                         <div className="box-header">
                             <h3><Navigation size={20} /> Navigation Guide</h3>
@@ -260,7 +261,7 @@ const LocationDetail = () => {
                         </div>
                     </div>
 
-                    
+                    {/* Reviews Section */}
                     <section className="reviews-section">
                         <h2>Traveler Reviews</h2>
                         <div className="reviews-grid">
@@ -339,7 +340,7 @@ const LocationDetail = () => {
                     </section>
                 </div>
 
-                {/* Sidebar Info */}
+           
                 <aside className="detail-sidebar">
                     <div className="sidebar-card">
                         <h3>Operating Hours</h3>

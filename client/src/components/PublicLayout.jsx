@@ -22,7 +22,7 @@ const PublicLayout = () => {
         localStorage.removeItem('travelerTrips'); // Clean up old data if any exists
         localStorage.removeItem('activeTripId');
         
-        clearState(); // clear the context context
+        clearState(); 
         
         navigate('/login');
     };
@@ -35,7 +35,7 @@ const PublicLayout = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Derived state for badge count
+   
     const activeTrip = plannedTrips.find(t => t.id === activeTripId);
     const tripCount = activeTrip ? activeTrip.locations.length : 0;
 

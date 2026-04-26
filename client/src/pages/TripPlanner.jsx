@@ -13,14 +13,14 @@ import axios from 'axios';
 
 const BASE_LOCATION = { lat: 6.892, lng: 79.963, name: 'Athurugiriya Pore' };
 
-const MultiRoutingMachine = ({ locations }) => {
+const MultiRoutingMachine = ({ locations, baseLocation }) => {
     const map = useMap();
 
     useEffect(() => {
-        if (!map || locations.length === 0) return;
+        if (!map || locations.length === 0 || !baseLocation) return;
 
         const waypoints = [
-            L.latLng(BASE_LOCATION.lat, BASE_LOCATION.lng),
+            L.latLng(baseLocation.lat, baseLocation.lng),
             ...locations.map(loc => L.latLng(loc.lat, loc.lng))
         ];
 
@@ -46,7 +46,7 @@ const MultiRoutingMachine = ({ locations }) => {
         }).addTo(map);
 
         return () => map.removeControl(routingControl);
-    }, [map, locations]);
+    }, [map, locations, baseLocation]);
 
     return null;
 }
@@ -59,18 +59,29 @@ const TripPlanner = () => {
     const [isCreating, setIsCreating] = useState(false);
     const [totalStats, setTotalStats] = useState({ distance: 0, time: 0 });
     
-    // Admin MultiRoute features
+    
     const [places, setPlaces] = useState([]);
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCategory, setFilterCategory] = useState('');
     const [fetchingPlaces, setFetchingPlaces] = useState(true);
     
-    // UI state
-    const [activeTab, setActiveTab] = useState('browse'); // 'browse' or 'route'
+
+    const [activeTab, setActiveTab] = useState('browse'); 
+    const [userLocation, setUserLocation] = useState(BASE_LOCATION);
 
     const apiUrl = 'http://localhost:5000/api/places';
     const catUrl = 'http://localhost:5000/api/categories';
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude, name: 'Current Location' }),
+                (err) => console.warn('Geolocation error:', err),
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
+    }, []);
 
     useEffect(() => {
         const fetchPlacesData = async () => {
@@ -132,10 +143,10 @@ const TripPlanner = () => {
         let newLocations;
         
         if (isSelected) {
-            
+          
             newLocations = tripItems.filter(loc => loc.id !== place._id);
         } else {
-        
+          
             const newLoc = {
                 id: place._id,
                 name: place.name,
@@ -334,7 +345,7 @@ const TripPlanner = () => {
                     )}
                 </aside>
 
-            
+               
                 <main className="map-view">
                     <div className="map-container-wrapper">
                         {tripItems.length > 0 ? (
@@ -345,7 +356,7 @@ const TripPlanner = () => {
                             >
                                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                                 {tripItems.length > 0 && (
-                                    <MultiRoutingMachine locations={tripItems} />
+                                    <MultiRoutingMachine locations={tripItems} baseLocation={userLocation} />
                                 )}
                             </MapContainer>
                         ) : (
