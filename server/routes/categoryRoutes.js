@@ -4,8 +4,7 @@ const auth = require('../middleware/auth');
 const roleAuth = require('../middleware/roleAuth');
 const Category = require('../models/Category');
 
-// @route   GET api/categories
-// @desc    Get all categories
+
 router.get('/', async (req, res) => {
     try {
         const categories = await Category.find().sort({ name: 1 });
@@ -16,8 +15,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route   POST api/categories
-// @desc    Create a category (Admin only)
+
 router.post('/', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 
@@ -37,8 +35,7 @@ router.post('/', [auth, roleAuth(['admin'])], async (req, res) => {
     }
 });
 
-// @route   PUT api/categories/:id
-// @desc    Update a category (Admin only)
+
 router.put('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 
@@ -55,8 +52,7 @@ router.put('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     }
 });
 
-// @route   DELETE api/categories/:id
-// @desc    Delete a category (Admin only)
+
 router.delete('/:id', [auth, roleAuth(['admin'])], async (req, res) => {
     try {
 
